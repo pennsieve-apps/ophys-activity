@@ -1,0 +1,713 @@
+cff-version: 1.2.0
+message: If you use this app, please cite it and the works it builds on, listed under references.
+type: software
+title: ophys-activity
+abstract: 'Population analysis of calcium imaging data from NWB: activity summary (event rates), Rastermap-sorted
+  population raster, pairwise correlations and cell assemblies (PCA/ICA after Lopes-dos-Santos et al. 2013) for any
+  recording; with a stimulus or trials table also stimulus-aligned responses, responsiveness against a random-time
+  null with FDR, tuning curves with orientation/direction selectivity (vector sum and peak indices) or a categorical
+  selectivity index, trial-to-trial reliability, signal and noise correlations, sparseness, and a trials x ROIs response
+  matrix for decoding. Part of the Pennsieve Two-photon Calcium Imaging workflow.'
+authors:
+- name: Pennsieve (University of Pennsylvania)
+contact:
+- given-names: Joost
+  family-names: Wagenaar
+  orcid: https://orcid.org/0009-0004-5925-5451
+  affiliation: University of Pennsylvania
+repository-code: https://github.com/pennsieve-apps/ophys-activity
+license: GPL-3.0-or-later
+keywords:
+- neuroscience
+- calcium-imaging
+- two-photon
+- nwb
+- tuning
+- orientation-selectivity
+- noise-correlations
+- cell-assemblies
+- rastermap
+references:
+- type: article
+  title: 'Rastermap: a discovery method for neural population recordings'
+  authors:
+  - family-names: 'Stringer'
+    given-names: 'Carsen'
+  - family-names: 'Zhong'
+    given-names: 'Lin'
+  - family-names: 'Syeda'
+    given-names: 'Atika'
+  - family-names: 'Du'
+    given-names: 'Fengtong'
+  - family-names: 'Kesa'
+    given-names: 'Maria'
+  - family-names: 'Pachitariu'
+    given-names: 'Marius'
+  year: 2024
+  journal: 'Nature Neuroscience'
+  volume: '28'
+  issue: '1'
+  start: '201'
+  end: '212'
+  doi: 10.1038/s41593-024-01783-4
+  identifiers:
+  - type: other
+    value: '39414974'
+    description: PubMed ID
+- type: article
+  title: 'Detecting cell assemblies in large neuronal populations'
+  authors:
+  - family-names: 'Lopes-dos-Santos'
+    given-names: 'Vítor'
+  - family-names: 'Ribeiro'
+    given-names: 'Sidarta'
+  - family-names: 'Tort'
+    given-names: 'Adriano B.L.'
+  year: 2013
+  journal: 'Journal of Neuroscience Methods'
+  volume: '220'
+  issue: '2'
+  start: '149'
+  end: '166'
+  doi: 10.1016/j.jneumeth.2013.04.010
+  identifiers:
+  - type: other
+    value: '23639919'
+    description: PubMed ID
+- type: article
+  title: 'Robust quantification of orientation selectivity and direction selectivity'
+  authors:
+  - family-names: 'Mazurek'
+    given-names: 'Mark'
+  - family-names: 'Kager'
+    given-names: 'Marisa'
+  - family-names: 'Van Hooser'
+    given-names: 'Stephen D.'
+  year: 2014
+  journal: 'Frontiers in Neural Circuits'
+  volume: '8'
+  doi: 10.3389/fncir.2014.00092
+  identifiers:
+  - type: other
+    value: '25147504'
+    description: PubMed ID
+- type: article
+  title: 'Measuring and interpreting neuronal correlations'
+  authors:
+  - family-names: 'Cohen'
+    given-names: 'Marlene R'
+  - family-names: 'Kohn'
+    given-names: 'Adam'
+  year: 2011
+  journal: 'Nature Neuroscience'
+  volume: '14'
+  issue: '7'
+  start: '811'
+  end: '819'
+  doi: 10.1038/nn.2842
+  identifiers:
+  - type: other
+    value: '21709677'
+    description: PubMed ID
+- type: article
+  title: 'Sparse Coding and Decorrelation in Primary Visual Cortex During Natural Vision'
+  authors:
+  - family-names: 'Vinje'
+    given-names: 'William E.'
+  - family-names: 'Gallant'
+    given-names: 'Jack L.'
+  year: 2000
+  journal: 'Science'
+  volume: '287'
+  issue: '5456'
+  start: '1273'
+  end: '1276'
+  doi: 10.1126/science.287.5456.1273
+  identifiers:
+  - type: other
+    value: '10678835'
+    description: PubMed ID
+- type: article
+  title: 'Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing'
+  authors:
+  - family-names: 'Benjamini'
+    given-names: 'Yoav'
+  - family-names: 'Hochberg'
+    given-names: 'Yosef'
+  year: 1995
+  journal: 'Journal of the Royal Statistical Society Series B: Statistical Methodology'
+  volume: '57'
+  issue: '1'
+  start: '289'
+  end: '300'
+  doi: 10.1111/j.2517-6161.1995.tb02031.x
+- type: article
+  title: 'A large-scale standardized physiological survey reveals functional organization of the mouse visual cortex'
+  authors:
+  - family-names: 'de Vries'
+    given-names: 'Saskia E. J.'
+  - family-names: 'Lecoq'
+    given-names: 'Jerome A.'
+  - family-names: 'Buice'
+    given-names: 'Michael A.'
+  - family-names: 'Groblewski'
+    given-names: 'Peter A.'
+  - family-names: 'Ocker'
+    given-names: 'Gabriel K.'
+  - family-names: 'Oliver'
+    given-names: 'Michael'
+  - family-names: 'Feng'
+    given-names: 'David'
+  - family-names: 'Cain'
+    given-names: 'Nicholas'
+  - family-names: 'Ledochowitsch'
+    given-names: 'Peter'
+  - family-names: 'Millman'
+    given-names: 'Daniel'
+  - family-names: 'Roll'
+    given-names: 'Kate'
+  - family-names: 'Garrett'
+    given-names: 'Marina'
+  - family-names: 'Keenan'
+    given-names: 'Tom'
+  - family-names: 'Kuan'
+    given-names: 'Leonard'
+  - family-names: 'Mihalas'
+    given-names: 'Stefan'
+  - family-names: 'Olsen'
+    given-names: 'Shawn'
+  - family-names: 'Thompson'
+    given-names: 'Carol'
+  - family-names: 'Wakeman'
+    given-names: 'Wayne'
+  - family-names: 'Waters'
+    given-names: 'Jack'
+  - family-names: 'Williams'
+    given-names: 'Derric'
+  - family-names: 'Barber'
+    given-names: 'Chris'
+  - family-names: 'Berbesque'
+    given-names: 'Nathan'
+  - family-names: 'Blanchard'
+    given-names: 'Brandon'
+  - family-names: 'Bowles'
+    given-names: 'Nicholas'
+  - family-names: 'Caldejon'
+    given-names: 'Shiella D.'
+  - family-names: 'Casal'
+    given-names: 'Linzy'
+  - family-names: 'Cho'
+    given-names: 'Andrew'
+  - family-names: 'Cross'
+    given-names: 'Sissy'
+  - family-names: 'Dang'
+    given-names: 'Chinh'
+  - family-names: 'Dolbeare'
+    given-names: 'Tim'
+  - family-names: 'Edwards'
+    given-names: 'Melise'
+  - family-names: 'Galbraith'
+    given-names: 'John'
+  - family-names: 'Gaudreault'
+    given-names: 'Nathalie'
+  - family-names: 'Gilbert'
+    given-names: 'Terri L.'
+  - family-names: 'Griffin'
+    given-names: 'Fiona'
+  - family-names: 'Hargrave'
+    given-names: 'Perry'
+  - family-names: 'Howard'
+    given-names: 'Robert'
+  - family-names: 'Huang'
+    given-names: 'Lawrence'
+  - family-names: 'Jewell'
+    given-names: 'Sean'
+  - family-names: 'Keller'
+    given-names: 'Nika'
+  - family-names: 'Knoblich'
+    given-names: 'Ulf'
+  - family-names: 'Larkin'
+    given-names: 'Josh D.'
+  - family-names: 'Larsen'
+    given-names: 'Rachael'
+  - family-names: 'Lau'
+    given-names: 'Chris'
+  - family-names: 'Lee'
+    given-names: 'Eric'
+  - family-names: 'Lee'
+    given-names: 'Felix'
+  - family-names: 'Leon'
+    given-names: 'Arielle'
+  - family-names: 'Li'
+    given-names: 'Lu'
+  - family-names: 'Long'
+    given-names: 'Fuhui'
+  - family-names: 'Luviano'
+    given-names: 'Jennifer'
+  - family-names: 'Mace'
+    given-names: 'Kyla'
+  - family-names: 'Nguyen'
+    given-names: 'Thuyanh'
+  - family-names: 'Perkins'
+    given-names: 'Jed'
+  - family-names: 'Robertson'
+    given-names: 'Miranda'
+  - family-names: 'Seid'
+    given-names: 'Sam'
+  - family-names: 'Shea-Brown'
+    given-names: 'Eric'
+  - family-names: 'Shi'
+    given-names: 'Jianghong'
+  - family-names: 'Sjoquist'
+    given-names: 'Nathan'
+  - family-names: 'Slaughterbeck'
+    given-names: 'Cliff'
+  - family-names: 'Sullivan'
+    given-names: 'David'
+  - family-names: 'Valenza'
+    given-names: 'Ryan'
+  - family-names: 'White'
+    given-names: 'Casey'
+  - family-names: 'Williford'
+    given-names: 'Ali'
+  - family-names: 'Witten'
+    given-names: 'Daniela M.'
+  - family-names: 'Zhuang'
+    given-names: 'Jun'
+  - family-names: 'Zeng'
+    given-names: 'Hongkui'
+  - family-names: 'Farrell'
+    given-names: 'Colin'
+  - family-names: 'Ng'
+    given-names: 'Lydia'
+  - family-names: 'Bernard'
+    given-names: 'Amy'
+  - family-names: 'Phillips'
+    given-names: 'John W.'
+  - family-names: 'Reid'
+    given-names: 'R. Clay'
+  - family-names: 'Koch'
+    given-names: 'Christof'
+  year: 2019
+  journal: 'Nature Neuroscience'
+  volume: '23'
+  issue: '1'
+  start: '138'
+  end: '151'
+  doi: 10.1038/s41593-019-0550-9
+  identifiers:
+  - type: other
+    value: '31844315'
+    description: PubMed ID
+- type: article
+  title: 'The Neurodata Without Borders ecosystem for neurophysiological data science'
+  authors:
+  - family-names: 'Rübel'
+    given-names: 'Oliver'
+  - family-names: 'Tritt'
+    given-names: 'Andrew'
+  - family-names: 'Ly'
+    given-names: 'Ryan'
+  - family-names: 'Dichter'
+    given-names: 'Benjamin K'
+  - family-names: 'Ghosh'
+    given-names: 'Satrajit'
+  - family-names: 'Niu'
+    given-names: 'Lawrence'
+  - family-names: 'Baker'
+    given-names: 'Pamela'
+  - family-names: 'Soltesz'
+    given-names: 'Ivan'
+  - family-names: 'Ng'
+    given-names: 'Lydia'
+  - family-names: 'Svoboda'
+    given-names: 'Karel'
+  - family-names: 'Frank'
+    given-names: 'Loren'
+  - family-names: 'Bouchard'
+    given-names: 'Kristofer E'
+  year: 2022
+  journal: 'eLife'
+  volume: '11'
+  start: 'e78362'
+  doi: 10.7554/eLife.78362
+  identifiers:
+  - type: other
+    value: '36193886'
+    description: PubMed ID
+- type: article
+  title: 'Array programming with NumPy'
+  authors:
+  - family-names: 'Harris'
+    given-names: 'Charles R.'
+  - family-names: 'Millman'
+    given-names: 'K. Jarrod'
+  - family-names: 'van der Walt'
+    given-names: 'Stéfan J.'
+  - family-names: 'Gommers'
+    given-names: 'Ralf'
+  - family-names: 'Virtanen'
+    given-names: 'Pauli'
+  - family-names: 'Cournapeau'
+    given-names: 'David'
+  - family-names: 'Wieser'
+    given-names: 'Eric'
+  - family-names: 'Taylor'
+    given-names: 'Julian'
+  - family-names: 'Berg'
+    given-names: 'Sebastian'
+  - family-names: 'Smith'
+    given-names: 'Nathaniel J.'
+  - family-names: 'Kern'
+    given-names: 'Robert'
+  - family-names: 'Picus'
+    given-names: 'Matti'
+  - family-names: 'Hoyer'
+    given-names: 'Stephan'
+  - family-names: 'van Kerkwijk'
+    given-names: 'Marten H.'
+  - family-names: 'Brett'
+    given-names: 'Matthew'
+  - family-names: 'Haldane'
+    given-names: 'Allan'
+  - family-names: 'del Río'
+    given-names: 'Jaime Fernández'
+  - family-names: 'Wiebe'
+    given-names: 'Mark'
+  - family-names: 'Peterson'
+    given-names: 'Pearu'
+  - family-names: 'Gérard-Marchant'
+    given-names: 'Pierre'
+  - family-names: 'Sheppard'
+    given-names: 'Kevin'
+  - family-names: 'Reddy'
+    given-names: 'Tyler'
+  - family-names: 'Weckesser'
+    given-names: 'Warren'
+  - family-names: 'Abbasi'
+    given-names: 'Hameer'
+  - family-names: 'Gohlke'
+    given-names: 'Christoph'
+  - family-names: 'Oliphant'
+    given-names: 'Travis E.'
+  year: 2020
+  journal: 'Nature'
+  volume: '585'
+  issue: '7825'
+  start: '357'
+  end: '362'
+  doi: 10.1038/s41586-020-2649-2
+  identifiers:
+  - type: other
+    value: '32939066'
+    description: PubMed ID
+- type: article
+  title: 'SciPy 1.0: fundamental algorithms for scientific computing in Python'
+  authors:
+  - family-names: 'Virtanen'
+    given-names: 'Pauli'
+  - family-names: 'Gommers'
+    given-names: 'Ralf'
+  - family-names: 'Oliphant'
+    given-names: 'Travis E.'
+  - family-names: 'Haberland'
+    given-names: 'Matt'
+  - family-names: 'Reddy'
+    given-names: 'Tyler'
+  - family-names: 'Cournapeau'
+    given-names: 'David'
+  - family-names: 'Burovski'
+    given-names: 'Evgeni'
+  - family-names: 'Peterson'
+    given-names: 'Pearu'
+  - family-names: 'Weckesser'
+    given-names: 'Warren'
+  - family-names: 'Bright'
+    given-names: 'Jonathan'
+  - family-names: 'van der Walt'
+    given-names: 'Stéfan J.'
+  - family-names: 'Brett'
+    given-names: 'Matthew'
+  - family-names: 'Wilson'
+    given-names: 'Joshua'
+  - family-names: 'Millman'
+    given-names: 'K. Jarrod'
+  - family-names: 'Mayorov'
+    given-names: 'Nikolay'
+  - family-names: 'Nelson'
+    given-names: 'Andrew R. J.'
+  - family-names: 'Jones'
+    given-names: 'Eric'
+  - family-names: 'Kern'
+    given-names: 'Robert'
+  - family-names: 'Larson'
+    given-names: 'Eric'
+  - family-names: 'Carey'
+    given-names: 'C J'
+  - family-names: 'Polat'
+    given-names: 'İlhan'
+  - family-names: 'Feng'
+    given-names: 'Yu'
+  - family-names: 'Moore'
+    given-names: 'Eric W.'
+  - family-names: 'VanderPlas'
+    given-names: 'Jake'
+  - family-names: 'Laxalde'
+    given-names: 'Denis'
+  - family-names: 'Perktold'
+    given-names: 'Josef'
+  - family-names: 'Cimrman'
+    given-names: 'Robert'
+  - family-names: 'Henriksen'
+    given-names: 'Ian'
+  - family-names: 'Quintero'
+    given-names: 'E. A.'
+  - family-names: 'Harris'
+    given-names: 'Charles R.'
+  - family-names: 'Archibald'
+    given-names: 'Anne M.'
+  - family-names: 'Ribeiro'
+    given-names: 'Antônio H.'
+  - family-names: 'Pedregosa'
+    given-names: 'Fabian'
+  - family-names: 'van Mulbregt'
+    given-names: 'Paul'
+  - name: 'SciPy 1.0 Contributors'
+  - family-names: 'Vijaykumar'
+    given-names: 'Aditya'
+  - family-names: 'Bardelli'
+    given-names: 'Alessandro Pietro'
+  - family-names: 'Rothberg'
+    given-names: 'Alex'
+  - family-names: 'Hilboll'
+    given-names: 'Andreas'
+  - family-names: 'Kloeckner'
+    given-names: 'Andreas'
+  - family-names: 'Scopatz'
+    given-names: 'Anthony'
+  - family-names: 'Lee'
+    given-names: 'Antony'
+  - family-names: 'Rokem'
+    given-names: 'Ariel'
+  - family-names: 'Woods'
+    given-names: 'C. Nathan'
+  - family-names: 'Fulton'
+    given-names: 'Chad'
+  - family-names: 'Masson'
+    given-names: 'Charles'
+  - family-names: 'Häggström'
+    given-names: 'Christian'
+  - family-names: 'Fitzgerald'
+    given-names: 'Clark'
+  - family-names: 'Nicholson'
+    given-names: 'David A.'
+  - family-names: 'Hagen'
+    given-names: 'David R.'
+  - family-names: 'Pasechnik'
+    given-names: 'Dmitrii V.'
+  - family-names: 'Olivetti'
+    given-names: 'Emanuele'
+  - family-names: 'Martin'
+    given-names: 'Eric'
+  - family-names: 'Wieser'
+    given-names: 'Eric'
+  - family-names: 'Silva'
+    given-names: 'Fabrice'
+  - family-names: 'Lenders'
+    given-names: 'Felix'
+  - family-names: 'Wilhelm'
+    given-names: 'Florian'
+  - family-names: 'Young'
+    given-names: 'G.'
+  - family-names: 'Price'
+    given-names: 'Gavin A.'
+  - family-names: 'Ingold'
+    given-names: 'Gert-Ludwig'
+  - family-names: 'Allen'
+    given-names: 'Gregory E.'
+  - family-names: 'Lee'
+    given-names: 'Gregory R.'
+  - family-names: 'Audren'
+    given-names: 'Hervé'
+  - family-names: 'Probst'
+    given-names: 'Irvin'
+  - family-names: 'Dietrich'
+    given-names: 'Jörg P.'
+  - family-names: 'Silterra'
+    given-names: 'Jacob'
+  - family-names: 'Webber'
+    given-names: 'James T'
+  - family-names: 'Slavič'
+    given-names: 'Janko'
+  - family-names: 'Nothman'
+    given-names: 'Joel'
+  - family-names: 'Buchner'
+    given-names: 'Johannes'
+  - family-names: 'Kulick'
+    given-names: 'Johannes'
+  - family-names: 'Schönberger'
+    given-names: 'Johannes L.'
+  - family-names: 'de Miranda Cardoso'
+    given-names: 'José Vinícius'
+  - family-names: 'Reimer'
+    given-names: 'Joscha'
+  - family-names: 'Harrington'
+    given-names: 'Joseph'
+  - family-names: 'Rodríguez'
+    given-names: 'Juan Luis Cano'
+  - family-names: 'Nunez-Iglesias'
+    given-names: 'Juan'
+  - family-names: 'Kuczynski'
+    given-names: 'Justin'
+  - family-names: 'Tritz'
+    given-names: 'Kevin'
+  - family-names: 'Thoma'
+    given-names: 'Martin'
+  - family-names: 'Newville'
+    given-names: 'Matthew'
+  - family-names: 'Kümmerer'
+    given-names: 'Matthias'
+  - family-names: 'Bolingbroke'
+    given-names: 'Maximilian'
+  - family-names: 'Tartre'
+    given-names: 'Michael'
+  - family-names: 'Pak'
+    given-names: 'Mikhail'
+  - family-names: 'Smith'
+    given-names: 'Nathaniel J.'
+  - family-names: 'Nowaczyk'
+    given-names: 'Nikolai'
+  - family-names: 'Shebanov'
+    given-names: 'Nikolay'
+  - family-names: 'Pavlyk'
+    given-names: 'Oleksandr'
+  - family-names: 'Brodtkorb'
+    given-names: 'Per A.'
+  - family-names: 'Lee'
+    given-names: 'Perry'
+  - family-names: 'McGibbon'
+    given-names: 'Robert T.'
+  - family-names: 'Feldbauer'
+    given-names: 'Roman'
+  - family-names: 'Lewis'
+    given-names: 'Sam'
+  - family-names: 'Tygier'
+    given-names: 'Sam'
+  - family-names: 'Sievert'
+    given-names: 'Scott'
+  - family-names: 'Vigna'
+    given-names: 'Sebastiano'
+  - family-names: 'Peterson'
+    given-names: 'Stefan'
+  - family-names: 'More'
+    given-names: 'Surhud'
+  - family-names: 'Pudlik'
+    given-names: 'Tadeusz'
+  - family-names: 'Oshima'
+    given-names: 'Takuya'
+  - family-names: 'Pingel'
+    given-names: 'Thomas J.'
+  - family-names: 'Robitaille'
+    given-names: 'Thomas P.'
+  - family-names: 'Spura'
+    given-names: 'Thomas'
+  - family-names: 'Jones'
+    given-names: 'Thouis R.'
+  - family-names: 'Cera'
+    given-names: 'Tim'
+  - family-names: 'Leslie'
+    given-names: 'Tim'
+  - family-names: 'Zito'
+    given-names: 'Tiziano'
+  - family-names: 'Krauss'
+    given-names: 'Tom'
+  - family-names: 'Upadhyay'
+    given-names: 'Utkarsh'
+  - family-names: 'Halchenko'
+    given-names: 'Yaroslav O.'
+  - family-names: 'Vázquez-Baeza'
+    given-names: 'Yoshiki'
+  year: 2020
+  journal: 'Nature Methods'
+  volume: '17'
+  issue: '3'
+  start: '261'
+  end: '272'
+  doi: 10.1038/s41592-019-0686-2
+  identifiers:
+  - type: other
+    value: '32015543'
+    description: PubMed ID
+- type: article
+  title: 'Matplotlib: A 2D Graphics Environment'
+  authors:
+  - family-names: 'Hunter'
+    given-names: 'John D.'
+  year: 2007
+  journal: 'Computing in Science & Engineering'
+  volume: '9'
+  issue: '3'
+  start: '90'
+  end: '95'
+  doi: 10.1109/MCSE.2007.55
+- type: data
+  title: 'Allen Institute - Visual Coding - Optical Physiology'
+  authors:
+  - family-names: 'Baker'
+    given-names: 'Cody'
+  year: 2024
+  publisher:
+    name: 'DANDI Archive'
+  url: https://doi.org/10.48324/dandi.000728/0.240827.1809
+  doi: 10.48324/dandi.000728/0.240827.1809
+- type: data
+  title: 'Hippocampal CA1 one-photon calcium imaging and pose-tracked behavior in wild-type and 5xFAD mice across four behavioral paradigms'
+  authors:
+  - family-names: 'Plusnin'
+    given-names: 'Viktor'
+  - family-names: 'Pospelov'
+    given-names: 'Nikita'
+  year: 2026
+  publisher:
+    name: 'DANDI Archive'
+  url: https://doi.org/10.48324/dandi.002047/0.261106.0903
+  doi: 10.48324/dandi.002047/0.261106.0903
+- type: software
+  title: Rastermap
+  authors:
+  - family-names: Stringer
+    given-names: Carsen
+  - family-names: Pachitariu
+    given-names: Marius
+  repository-code: https://github.com/MouseLand/rastermap
+  url: https://github.com/MouseLand/rastermap
+  license: GPL-3.0
+  version: '1.0'
+- type: software
+  title: scikit-learn
+  authors:
+  - name: The scikit-learn developers
+  repository-code: https://github.com/scikit-learn/scikit-learn
+  url: https://github.com/scikit-learn/scikit-learn
+  license: BSD-3-Clause
+  version: 1.9.1
+  notes: 'scikit-learn asks to cite Pedregosa F, Varoquaux G, Gramfort A, Michel V, Thirion B, Grisel O, Blondel M,
+    Prettenhofer P, Weiss R, Dubourg V, Vanderplas J, Passos A, Cournapeau D, Brucher M, Perrot M, Duchesnay E.
+    Scikit-learn: Machine Learning in Python. Journal of Machine Learning Research 12(85):2825-2830, 2011
+    (https://jmlr.org/papers/v12/pedregosa11a.html; no DOI).'
+- type: software
+  title: pandas
+  authors:
+  - name: The pandas development team
+  repository-code: https://github.com/pandas-dev/pandas
+  url: https://github.com/pandas-dev/pandas
+  license: BSD-3-Clause
+  version: 3.1.1
+- type: software
+  title: h5py
+  authors:
+  - name: Andrew Collette and contributors
+  repository-code: https://github.com/h5py/h5py
+  url: https://github.com/h5py/h5py
+  license: BSD-3-Clause
+  version: 3.16.0

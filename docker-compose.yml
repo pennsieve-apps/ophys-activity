@@ -1,0 +1,22 @@
+services:
+  processor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    platform: linux/amd64
+    mem_limit: 3g
+    network_mode: none
+    # As on Lambda: read-only root, an arbitrary unprivileged user, HOME and TMPDIR under /tmp.
+    read_only: true
+    user: "65534:65534"
+    tmpfs:
+      - /tmp
+    environment:
+      HOME: /tmp/s/home
+      TMPDIR: /tmp/s/tmp
+    entrypoint: ["sh", "-c", "mkdir -p /tmp/s/home /tmp/s/tmp && exec python3 -m processor.main"]
+    env_file:
+      - dev.env
+    volumes:
+      - ./data/fixture/linked:/data/input:ro
+      - ./data/output:/data/output
