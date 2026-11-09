@@ -130,6 +130,15 @@ def main() -> int:
         log.error("bad parameters: %s", exc)
         return 2
     threads = common.set_threads(params["THREADS"])
+    # Writable caches under $TMPDIR (on Lambda only INPUT_DIR, OUTPUT_DIR, HOME and TMPDIR are
+    # writable, and nothing the image put in /tmp or HOME is there).
+    import tempfile
+
+    scratch = Path(tempfile.gettempdir())
+    for var, sub in (("MPLCONFIGDIR", "mpl"), ("NUMBA_CACHE_DIR", "numba")):
+        if not os.environ.get(var):
+            os.environ[var] = str(scratch / sub)
+        Path(os.environ[var]).mkdir(parents=True, exist_ok=True)
     from .session import run_session, select_stimulus  # noqa: F401  (imports numpy after THREADS is set)
     from .inputs import build_sessions, discover
 

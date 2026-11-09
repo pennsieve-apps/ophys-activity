@@ -169,11 +169,74 @@ logged and skipped.
 
 ## Results on the demo data
 
-RESULTS_PLACEHOLDER
+Outputs are in `workflow-systems-neuroscience/data/work/<demo>/ophys-activity/`.
+
+**Allen Brain Observatory, VISp layer 2/3** (DANDI:000728, session
+`sub-496001363_ses-503109347-StimA`, Allen's own ΔF/F of 353 ROIs, whole session, 115,497 frames
+at 30 Hz; the three drifting-grating blocks, 628 trials = 8 directions × 5 temporal frequencies ×
+15 + 30 blanks; defaults). The stimulus table is found in the same file
+(`stimulus/presentation/drifting_gratings`), conditions `orientation_in_degrees` (directions) ×
+`temporal_frequency_in_hz`, response window 2 s (the grating duration), baseline 1 s.
+
+- **53 of 353 ROIs responsive** (15 %; random-time null, 10,000 shuffles, BH q < 0.05), 49 of
+  them selective (Kruskal-Wallis). The more liberal blank-sweep criterion calls 137 (39 %).
+  Preferred directions of responsive ROIs are spread over all eight (0°: 10, 45°: 9, 90°: 13,
+  135°: 3, 180°: 9, 225°: 4, 270°: 3, 315°: 2).
+- Medians over responsive ROIs: gOSI 0.85, gDSI 0.80, peak OSI 1.03, DSI 0.91; split-half
+  reliability 0.82, trial-to-trial reliability 0.18; lifetime sparseness 0.90, population
+  sparseness 0.97. Mean signal correlation 0.05, mean noise correlation 0.18 (a population-wide
+  shared fluctuation; signal vs noise correlation across pairs r = 0.37). Activity correlation
+  0.07; 28 assemblies (circular-shift bound 1.58; the Marchenko-Pastur bound finds 50+);
+  0.11 events/s per ROI.
+- **Against the Allen Brain Observatory's published per-cell metrics** (de Vries et al. 2020;
+  `scripts/compare_allen.py`, 241 of the 353 ROIs have published drifting-grating metrics, matched
+  by cell_specimen_id): for our 53 responsive ROIs the preferred direction is the same as Allen's
+  `pref_dir_dg` in 94 % (vector-sum direction within 4.2° median), the preferred temporal frequency
+  in 89 %; Pearson r with Allen's values: gDSI 0.92, gOSI 0.88, DSI 0.90, trial reliability
+  (`reliability_dg`) 0.95, peak OSI 0.54 (peak OSI is the noisiest index). Medians agree (gOSI 0.85
+  vs 0.90, gDSI 0.80 vs 0.82, DSI 0.91 vs 0.93). Over all 241 matched ROIs, preferred direction
+  agrees in 83 %, gDSI r = 0.76.
+- **First grating block only** (`T_STOP=631`, the window of the raw movie that `suite2p` and
+  `ophys-traces` process; 199 trials, ~5 per condition, 6 of 40 conditions with < 3 trials left
+  out): 19 responsive ROIs (5 %); the preferred direction matches Allen's (computed from all
+  three blocks) in 90 % of them, gDSI r = 0.61, so one 10-minute block is enough for strongly
+  tuned cells but not for a census. ophys-traces output of our own Suite2p run was not yet in
+  `data/work/allen-2p/ophys-traces/` when this was built; rerun on it then (and match ROIs to
+  Allen's by mask overlap before using `scripts/compare_allen.py`).
+
+**Spontaneous path, hippocampal CA1 one-photon** (DANDI:002047, six open-field sessions, 12 min,
+CNMF-E `Fluorescence/C`, the authors' `accepted` ROIs, no stimulus table): accepted ROIs (of all)
+F07 42/118, F14 265/321, F20 239/331 (5xFAD), F35 148/441, F40 247/379, F48 245/593 (WT); median
+event rate 1.2–4.1 events/min; mean pairwise correlation 0.002–0.016; assemblies 1, 8, 3 (5xFAD)
+and 0, 4, 4 (WT). Three animals per genotype are far too few for a group comparison; these are
+descriptive.
+
+**Synthetic fixture** (`tests/`): all 36 driven ROIs responsive and none of the 4 undriven ones;
+planted preferred directions recovered within 22.5° (peak condition exact in ≥ 95 %); the
+orientation-tuned ROIs have low gDSI; both planted assemblies recovered (Jaccard ≥ 0.8); the
+preferred odour of every odour-tuned ROI recovered from a stimulus.csv.
 
 ## Runtime
 
-RUNTIME_PLACEHOLDER
+`computeTypes: [standard]`, 2 vCPU / 3072 MiB, 900 s timeout. These fit the platform's Lambda
+limits, so the platform may run it as a Lambda step (it decides from these numbers). The image
+is 1.1 GB.
+
+Measured in the linux/amd64 image under emulation on an M-series Mac (Docker `--memory 3g
+--cpus 2 --network none --read-only --user 65534:65534 --tmpfs /tmp`, defaults), on a shared
+machine with other builds running:
+
+| Data | Size | Wall time | cgroup `memory.peak` |
+|---|---|---|---|
+| Allen session (ΔF/F) | 353 ROIs × 115,497 frames (64 min), 628 trials | 149 s | 1.24 GB |
+| Open field, 6 sessions | 42–265 ROIs × ~21,400 frames (12 min) each | 130 s | 0.95 GB |
+| Synthetic fixture, 3 sessions | 20–40 ROIs | 61 s | 0.79 GB |
+
+Memory scales with one session's traces (frames × ROIs × 4 bytes, 163 MB here) plus the aligned
+trials × ROIs × time array (107 MB here; not stored when above 150 M values) and ~0.4 GB of
+imported libraries. Time is dominated by the responsiveness test (N_SHUFFLES × trials × ROIs)
+and Rastermap; a session with thousands of ROIs and trials may need a longer `timeoutSeconds` or
+fewer `N_SHUFFLES`. No GPU is used.
 
 ## Running it locally
 

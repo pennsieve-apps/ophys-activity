@@ -57,7 +57,7 @@ def raster(path: Path, sid: str, Zs: np.ndarray, tb: np.ndarray, trials: dict | 
             m = (img.shape[1] // k) * k
             img = img[:, :m].reshape(img.shape[0], -1, k).mean(axis=2)
             ts = ts[:m].reshape(-1, k).mean(axis=1)
-        vmax = 1.5 if group == 1 else 1.0
+        vmax = 3.0 if group == 1 else 1.5   # single ROIs are noisier than averaged rows
         ax.imshow(img, aspect="auto", cmap="gray_r", vmin=0, vmax=vmax, interpolation="nearest",
                   extent=(ts[0], ts[-1], n, 0))
         ax.set_title(title, loc="left")

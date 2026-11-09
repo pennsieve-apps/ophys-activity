@@ -218,3 +218,26 @@ def test_pynwb_written_file(tmp_path):
     s = json.loads((tmp_path / "o" / "ophys-activity" / "summary.json").read_text())["sessions"]["sub-a_ses-b"]
     assert s["signal"] == "deconvolved" and s["n_rois"] == 6
     assert s["stim_table"] == "trials" and s["n_trials"] == 10 and s["condition_columns"] == []
+
+
+def test_session_port_nwb_with_traces(fixture_dir, tmp_path):
+    """A session-port NWB that also has ROI traces (the Allen companion file next to ophys-traces'
+    output) is used for its stimulus table, not analysed as a second session."""
+    import shutil
+
+    import h5py
+
+    d, _ = fixture_dir
+    inp = tmp_path / "in"
+    (inp / "traces").mkdir(parents=True)
+    (inp / "session").mkdir()
+    shutil.copy(d / "linked/traces/sub-syn01_ses-grating_ophys.nwb", inp / "traces")
+    comp = inp / "session/sub-syn01_ses-grating_behavior+ophys.nwb"
+    shutil.copy(d / "linked/traces/sub-syn01_ses-grating_ophys.nwb", comp)
+    with h5py.File(d / "linked/session/sub-syn01_ses-grating_behavior.nwb", "r") as src, h5py.File(comp, "a") as dst:
+        src.copy(src["stimulus/presentation/drifting_gratings"], dst["stimulus/presentation"], "drifting_gratings")
+    res = run_app(inp, tmp_path / "o", N_SHUFFLES="500")
+    assert res.returncode == 0, res.stdout + res.stderr
+    s = json.loads((tmp_path / "o" / "ophys-activity" / "summary.json").read_text())["sessions"]
+    assert list(s) == ["sub-syn01_ses-grating"]
+    assert s["sub-syn01_ses-grating"]["stim_table"] == "drifting_gratings"

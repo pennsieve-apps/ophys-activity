@@ -135,6 +135,10 @@ def discover(root: Path) -> Found:
         name = p.name.lower()
         if name.endswith(NWB_SUFFIXES):
             kind = probe_nwb(p)
+            # A file linked into the `session` port is a stimulus source even when it also has ROI
+            # traces (the Allen companion NWB next to ophys-traces' output of the same session).
+            if kind == "traces" and p.relative_to(root).parts[0] == "session":
+                kind = "session"
             if kind == "traces":
                 found.traces.append(p)
             elif kind == "session":
@@ -160,14 +164,22 @@ def build_sessions(found: Found, root: Path) -> tuple[list[Session], list[str]]:
         except (OSError, csv.Error) as exc:
             warnings.append(f"could not read {s.name}: {exc}")
     sessions: dict[str, Session] = {}
+    base_ids: dict[str, list[str]] = {}
     for p in found.traces:
         sid, row, how = session_id_for(p, root, rows)
+        base_ids.setdefault(sid, [])
         if sid in sessions:
             # Two traces files with one id (e.g. two planes): keep both, distinguished by stem.
             alt = sanitise(f"{sid}_{p.stem}")
             warnings.append(f"{p.name}: session_id {sid} already taken by {sessions[sid].traces.name}; using {alt}")
             sid = alt
         sessions[sid] = Session(sid, p, row, how)
+        base_ids[session_id_for(p, root, rows)[0]].append(sid)
+    # Traces files of one session (e.g. ours and the source's, merged side by side): each one's
+    # stimulus tables are candidates for the others.
+    for sids in base_ids.values():
+        for a in sids:
+            sessions[a].stim_nwb += [sessions[b].traces for b in sids if b != a]
 
     def owner(path: Path) -> str | None:
         sid, _, _ = session_id_for(path, root, rows)
