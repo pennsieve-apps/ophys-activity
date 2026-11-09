@@ -6,9 +6,9 @@ Janelia Research Campus (MouseLand, https://github.com/MouseLand/rastermap; Stri
 raster, and implements published analysis methods: cell-assembly detection by PCA and ICA from
 Vítor Lopes-dos-Santos, Sidarta Ribeiro and Adriano Tort (Brain Institute, Federal University of
 Rio Grande do Norte; *J Neurosci Methods* 2013), vector-sum orientation and direction selectivity
-from Mark Mazurek, Marisa Kager and Stephen Van Hooser (Brandeis University; *Front Neural
-Circuits* 2014), and the peak-based tuning metrics of the Allen Brain Observatory (de Vries et al.
-2020). **Pennsieve packages these methods; it did not develop them.** The demo data are the Allen
+from Mark Mazurek, Marisa Kager and Stephen Van Hooser (Brandeis University and Metropolitan State
+University of Denver; *Front Neural Circuits* 2014), and the peak-based tuning metrics of the
+Allen Brain Observatory (de Vries et al. 2020). **Pennsieve packages these methods; it did not develop them.** The demo data are the Allen
 Institute's Visual Coding 2p survey (DANDI:000728, de Vries et al. 2020) and hippocampal CA1
 one-photon recordings shared by Viktor Plusnin and Nikita Pospelov (DANDI:002047), both CC-BY-4.0.
 
@@ -197,7 +197,7 @@ at 30 Hz; the three drifting-grating blocks, 628 trials = 8 directions × 5 temp
   vs 0.90, gDSI 0.80 vs 0.82, DSI 0.91 vs 0.93). Over all 241 matched ROIs, preferred direction
   agrees in 83 %, gDSI r = 0.76.
 - **First grating block only** (`T_STOP=631`, the window of the raw movie that `suite2p` and
-  `ophys-traces` process; 199 trials, ~5 per condition, 6 of 40 conditions with < 3 trials left
+  `ophys-traces` process; 199 trials, ~5 per condition, 6 of the 39 conditions in the window with < 3 trials left
   out): 19 responsive ROIs (5 %); the preferred direction matches Allen's (computed from all
   three blocks) in 90 % of them, gDSI r = 0.61, so one 10-minute block is enough for strongly
   tuned cells but not for a census. ophys-traces output of our own Suite2p run was not yet in
@@ -229,7 +229,7 @@ machine with other builds running:
 | Data | Size | Wall time | cgroup `memory.peak` |
 |---|---|---|---|
 | Allen session (ΔF/F) | 353 ROIs × 115,497 frames (64 min), 628 trials | 149 s | 1.24 GB |
-| Open field, 6 sessions | 42–265 ROIs × ~21,400 frames (12 min) each | 130 s | 0.95 GB |
+| Open field, 6 sessions | 42–265 ROIs × ~21,400 frames (12 min) each | 127 s | 0.90 GB |
 | Synthetic fixture, 3 sessions | 20–40 ROIs | 61 s | 0.79 GB |
 
 Memory scales with one session's traces (frames × ROIs × 4 bytes, 163 MB here) plus the aligned
@@ -319,9 +319,10 @@ author lists in `CITATION.cff`.
   https://doi.org/10.1038/s41586-020-2649-2, PMID 32939066; Virtanen P, et al. SciPy 1.0.
   *Nature Methods* 17, 261–272 (2020). https://doi.org/10.1038/s41592-019-0686-2,
   PMID 32015543; Hunter JD. Matplotlib: a 2D graphics environment. *Computing in Science &
-  Engineering* 9, 90–95 (2007). https://doi.org/10.1109/MCSE.2007.55; scikit-learn
-  (https://github.com/scikit-learn/scikit-learn), pandas, h5py.
-- Data: Allen Institute – Visual Coding – Optical Physiology, DANDI:000728 v0.240827.1809,
+  Engineering* 9, 90–95 (2007). https://doi.org/10.1109/MCSE.2007.55; scikit-learn (Pedregosa F, et al. Scikit-learn: machine
+  learning in Python. *Journal of Machine Learning Research* 12, 2825–2830 (2011); no DOI;
+  https://jmlr.org/papers/v12/pedregosa11a.html), pandas, h5py.
+- Data: Baker C. Allen Institute – Visual Coding – Optical Physiology, DANDI:000728 v0.240827.1809,
   https://doi.org/10.48324/dandi.000728/0.240827.1809 (CC-BY-4.0); Plusnin V, Pospelov N.
   Hippocampal CA1 one-photon calcium imaging and pose-tracked behavior in wild-type and 5xFAD
   mice across four behavioral paradigms, DANDI:002047 v0.261106.0903,

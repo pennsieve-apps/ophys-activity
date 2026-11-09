@@ -691,6 +691,10 @@ references:
   url: https://github.com/scikit-learn/scikit-learn
   license: BSD-3-Clause
   version: 1.9.1
+  notes: 'scikit-learn asks to cite Pedregosa F, Varoquaux G, Gramfort A, Michel V, Thirion B, Grisel O, Blondel M,
+    Prettenhofer P, Weiss R, Dubourg V, Vanderplas J, Passos A, Cournapeau D, Brucher M, Perrot M, Duchesnay E.
+    Scikit-learn: Machine Learning in Python. Journal of Machine Learning Research 12(85):2825-2830, 2011
+    (https://jmlr.org/papers/v12/pedregosa11a.html; no DOI).'
 - type: software
   title: pandas
   authors:

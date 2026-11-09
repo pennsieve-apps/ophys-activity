@@ -29,7 +29,7 @@ application:
 runtime:
   cpu: 2048
   # Measured on the Allen Brain Observatory session (353 ROIs, 115,497 frames, 628 trials):
-  # 201 s and 1.2 GB peak (cgroup memory.peak) with 2 CPUs, linux/amd64 under emulation on an
+  # 146 s and 1.2 GB peak (cgroup memory.peak) with 2 CPUs, linux/amd64 under emulation on an
   # M-series Mac; see README "Runtime". Within the platform's Lambda limits (the platform
   # decides eligibility from these numbers); larger recordings may need more time.
   memory: 3072

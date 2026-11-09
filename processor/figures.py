@@ -310,8 +310,11 @@ def assemblies(path: Path, sid: str, res: dict, tb: np.ndarray, roi_order: np.nd
     fig.suptitle(f"{sid}: {n} cell assemblies" + (f" (first {k} shown)" if n > k else ""), x=0.01, ha="left",
                  fontsize=9)
     _save(fig, path)
-    return ("Cell assemblies (groups of ROIs that are repeatedly active together), found by PCA with the "
-            "Marchenko-Pastur bound plus ICA (Lopes-dos-Santos et al. 2013). Left: each assembly's weight per ROI; "
+    bound = ("the Marchenko-Pastur bound" if res.get("null") == "mp" else
+             "an eigenvalue bound from circularly shifted surrogates (our adaptation of the paper's Marchenko-Pastur "
+             "bound for autocorrelated calcium signals)")
+    return ("Cell assemblies (groups of ROIs that are repeatedly active together), found by PCA with "
+            f"{bound} plus ICA (Lopes-dos-Santos et al. 2013). Left: each assembly's weight per ROI; "
             "orange ROIs are its members. Right: how strongly the assembly's pattern is expressed over time; sharp "
             "peaks are moments when its members fire together. Assemblies made of neighbouring ROIs in the field "
             "of view can also come from shared neuropil or motion.")
