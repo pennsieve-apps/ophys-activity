@@ -1,0 +1,3 @@
+-r requirements.txt
+pytest==9.2.0
+pynwb==4.2.0

@@ -1,0 +1,196 @@
+# yaml-language-server: $schema=https://schemas.pennsieve.io/app-manifest/v1.json
+schemaVersion: "1.0"
+application:
+  name: Calcium Imaging Population Activity
+  description: >-
+    What does a population of imaged neurons do, and what does it respond to? Reads ROI activity
+    from any NWB file with processing/ophys (ophys-traces output or DANDI: Deconvolved, else
+    DfOverF, else Fluorescence) and, when a stimulus or trials table is available (TimeIntervals in
+    a session NWB or in the same file, or a stimulus.csv), aligns the activity to it:
+    baseline-subtracted responses (trials x ROIs x time), responsiveness against a random-time null
+    with Benjamini-Hochberg FDR, tuning curves for any condition column with orientation and
+    direction selectivity (vector-sum gOSI/gDSI and peak OSI/DSI, preferred direction) or a
+    categorical selectivity index, trial-to-trial reliability, signal and noise correlations,
+    lifetime and population sparseness, and a trials x ROIs response matrix for decoding. Every
+    recording also gets event rates, a Rastermap-sorted population raster (Rastermap, Stringer et
+    al. 2024, HHMI Janelia), pairwise correlations and cell assemblies (PCA/ICA, Lopes-dos-Santos
+    et al. 2013). Figures with captions and summary.json for the report.
+  type: processor
+  tags:
+    - neuroscience
+    - calcium-imaging
+    - two-photon
+    - nwb
+    - tuning
+    - orientation-selectivity
+    - correlations
+    - cell-assemblies
+    - rastermap
+runtime:
+  cpu: 2048
+  # Measured on the Allen Brain Observatory session (353 ROIs, 115,497 frames, 628 trials),
+  # linux/amd64 under emulation on an M-series Mac: see README "Runtime".
+  memory: 4096
+  computeTypes:
+    - standard
+  timeoutSeconds: 7200
+parameters:
+  - name: SIGNAL
+    type: string
+    description: >-
+      Which ROI series to analyse: auto (Deconvolved > DfOverF > Fluorescence > event series),
+      deconvolved, dff, fluorescence or events.
+    defaultValue: auto
+    validValues: [auto, deconvolved, dff, fluorescence, events]
+  - name: SERIES
+    type: string
+    description: Pick the RoiResponseSeries whose NWB path contains this text (e.g. 'DfOverF/DfOverF'); empty = by SIGNAL.
+    defaultValue: ""
+  - name: ACCEPTED_ONLY
+    type: boolean
+    description: Analyse only ROIs with accepted = true (or iscell probability >= 0.5) when the PlaneSegmentation has that column.
+    defaultValue: true
+  - name: T_START
+    type: string
+    description: Start of the analysed window, seconds on the session clock; empty = start of the recording.
+    defaultValue: ""
+  - name: T_STOP
+    type: string
+    description: End of the analysed window, seconds on the session clock; empty = end of the recording.
+    defaultValue: ""
+  - name: STIM_TABLE
+    type: string
+    description: >-
+      Stimulus / trials table to align to: auto (intervals/trials, else the TimeIntervals table
+      under intervals/ or stimulus/presentation/ with a condition column and the most rows, else a
+      stimulus CSV), the name of a TimeIntervals table anywhere in the NWB (also behavioural ones
+      under processing/, e.g. 'locomotion' for event-aligned analysis), or none (spontaneous only).
+    defaultValue: auto
+  - name: CONDITION
+    type: string
+    description: >-
+      Condition column(s), comma-separated, primary first (e.g. 'orientation_in_degrees,temporal_frequency_in_hz');
+      auto detects an angle column (direction / orientation) and grating parameters, else a column
+      named condition / stimulus / trial_type / odor; none = all trials as one condition.
+    defaultValue: auto
+  - name: MAX_LEVELS
+    type: integer
+    description: A column with more distinct values than this is not treated as a condition.
+    defaultValue: 24
+    min: 2
+  - name: MIN_TRIALS
+    type: integer
+    description: Fewest trials in the analysed window for a stimulus analysis (fewer = spontaneous only).
+    defaultValue: 5
+    min: 2
+  - name: BASELINE_S
+    type: number
+    description: Pre-stimulus baseline window (s before onset) subtracted from every trial.
+    defaultValue: 1.0
+    min: 0.05
+  - name: RESPONSE_S
+    type: number
+    description: Response window (s after onset); 0 = the median trial duration (stop_time - start_time).
+    defaultValue: 0
+    min: 0
+  - name: POST_S
+    type: number
+    description: Extra seconds after the response window kept in the aligned traces (figures only).
+    defaultValue: 1.0
+    min: 0
+  - name: N_SHUFFLES
+    type: integer
+    description: Random-time shuffles for the responsiveness test; the smallest p-value is 1/(N+1).
+    defaultValue: 10000
+    min: 99
+  - name: FDR
+    type: number
+    description: Benjamini-Hochberg false discovery rate for 'responsive' and 'tuned'.
+    defaultValue: 0.05
+    min: 0.0001
+    max: 0.5
+  - name: BIN_S
+    type: number
+    description: Bin width (s) of the activity used for Rastermap, correlations and assemblies.
+    defaultValue: 0.2
+    min: 0.01
+  - name: EVENT_Z
+    type: number
+    description: An event is an upward crossing of median + EVENT_Z x robust noise (MAD) of the ROI's trace.
+    defaultValue: 3.0
+    min: 0.5
+  - name: ASSEMBLY_NULL
+    type: string
+    description: >-
+      Eigenvalue bound for counting assemblies: shift (largest eigenvalue of circularly shifted
+      surrogates; right for autocorrelated calcium signals) or mp (Marchenko-Pastur, as in
+      Lopes-dos-Santos et al. 2013).
+    defaultValue: shift
+    validValues: [shift, mp]
+  - name: TOP_N
+    type: integer
+    description: ROIs shown in the tuning-curve and polar figures.
+    defaultValue: 12
+    min: 1
+  - name: SEED
+    type: integer
+    description: Seed of every random step (shuffles, ICA, surrogates, Rastermap).
+    defaultValue: 42
+  - name: THREADS
+    type: integer
+    description: Threads for BLAS/numba; 0 = from the container's CPU quota.
+    defaultValue: 0
+    min: 0
+inputs:
+  - name: traces
+    description: >-
+      NWB files with processing/ophys RoiResponseSeries (ophys-traces' <session_id>_ophys.nwb, or
+      any DANDI ophys NWB), one session per file. Masks (pixel_mask / image_mask) are used for the
+      ROI map when present.
+    mediaTypes:
+      - "application/x-hdf5; profile=nwb"
+    placement: subfolder
+    required: true
+  - name: session
+    description: >-
+      Optional stimulus / trials: an NWB file with TimeIntervals (intervals/trials,
+      stimulus/presentation/<table>, e.g. the Allen companion NWB's drifting_gratings), matched to
+      the traces by session_id, or a CSV with start_time, stop_time and condition columns
+      (<session_id>_stimulus.csv, or a session_id column). Without it, tables in the traces NWB are used.
+    mediaTypes:
+      - "application/x-hdf5; profile=nwb"
+      - text/csv
+    placement: subfolder
+    required: false
+  - name: metadata
+    description: Optional sessions.csv (session_id, path, subject_id, condition, group, ...); its columns are carried into the tables and summary.json.
+    mediaTypes:
+      - text/csv
+    placement: subfolder
+    required: false
+outputs:
+  - name: activity
+    description: >-
+      ophys-activity/<session_id>/: <session_id>_rois.csv (per ROI: event rate, responsiveness,
+      preferred condition, OSI/DSI/gOSI/gDSI, preferred direction, selectivity, reliability,
+      sparseness, Rastermap rank, assemblies, position), _tuning.csv, _trials.csv,
+      _responses.npz (trials x ROIs response matrix and aligned traces), _correlations.npz,
+      _assemblies.csv/.npz and PNG figures (Rastermap raster, mean responses, tuning curves, polar
+      plots, OSI/DSI distributions, ROI map, correlation matrices, assemblies); ophys-activity/rois.csv,
+      summary.json, provenance.json.
+    mediaTypes:
+      - text/csv
+      - application/json
+      - image/png
+      - application/octet-stream
+
+# How a release is tested before it is made public: three synthetic sessions (gratings with a
+# separate session NWB, spontaneous with planted assemblies, odours from a stimulus.csv).
+# See app-deploy-service docs/app-manifest-review.md.
+review:
+  version: 1
+  generate:
+    command: python -m tests.make_fixture "$REVIEW_INPUT_DIR" --layout linked
+    root: linked
+  parameters:
+    N_SHUFFLES: 2000
