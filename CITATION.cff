@@ -1,5 +1,6 @@
 cff-version: 1.2.0
-message: If you use this app, please cite it and the works it builds on, listed under references.
+message: >-
+  If you use this app, please cite the work it implements (preferred-citation), this release, and Pennsieve (RRID:SCR_021677); the other works it builds on are listed under references.
 type: software
 title: ophys-activity
 abstract: 'Population analysis of calcium imaging data from NWB: activity summary (event rates), Rastermap-sorted
@@ -27,6 +28,34 @@ keywords:
 - noise-correlations
 - cell-assemblies
 - rastermap
+# The work this app implements; the release report's "How to cite" puts it first.
+preferred-citation:
+  type: article
+  title: 'Rastermap: a discovery method for neural population recordings'
+  authors:
+  - family-names: Stringer
+    given-names: Carsen
+  - family-names: Zhong
+    given-names: Lin
+  - family-names: Syeda
+    given-names: Atika
+  - family-names: Du
+    given-names: Fengtong
+  - family-names: Kesa
+    given-names: Maria
+  - family-names: Pachitariu
+    given-names: Marius
+  year: 2024
+  journal: Nature Neuroscience
+  volume: '28'
+  issue: '1'
+  start: '201'
+  end: '212'
+  doi: 10.1038/s41593-024-01783-4
+  identifiers:
+  - type: other
+    value: '39414974'
+    description: PubMed ID
 references:
 - type: article
   title: 'Rastermap: a discovery method for neural population recordings'
